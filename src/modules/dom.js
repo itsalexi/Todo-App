@@ -80,17 +80,46 @@ const DOMStuff = (() => {
     edit.textContent = "Edit";
 
     project_info.appendChild(edit);
+
+    // Tasks
+    const task_container = document.createElement("div");
+    task_container.classList.add("task-container");
+    const tasks = document.createElement("div");
+    tasks.classList.add("tasks");
+    task_container.appendChild(tasks);
+    project_content.appendChild(task_container);
+    renderTasks(projects, project);
   };
 
   const addProjectFromModal = function (title, desc) {
     main.createProject(title, desc);
   };
 
-  //   const testSomething = function () {
-  //     console.log(main.getProjects());
-  //     main.createProject("another one", "cool");
-  //     console.log(main.getProjects());
-  //   };
+  const renderTasks = function (projects, index) {
+    const tasks = projects[index].tasks;
+    const taskDOM = document.querySelector(".tasks");
+    for (task in tasks) {
+      const taskElement = document.createElement("div");
+      taskElement.classList.add("task");
+      taskDOM.appendChild(taskElement);
+      const taskInfo = document.createElement("div");
+      taskInfo.classList.add("task-info");
+      const checkbox = document.createElement("div");
+      checkbox.classList.add("checkbox");
+      const taskName = document.createElement("p");
+      taskName.classList.add("taskName");
+      taskElement.appendChild(taskInfo);
+      taskInfo.appendChild(checkbox);
+      taskName.textContent = tasks[task].title;
+      taskInfo.appendChild(taskName);
+      const taskDue = document.createElement("p");
+      taskDue.classList.add("timedue");
+      taskElement.appendChild(taskDue);
+      taskDue.textContent = tasks[task].dueDate;
+    }
+  };
+
+  // MODALS
 
   const modal = document.querySelector(".modal");
 
