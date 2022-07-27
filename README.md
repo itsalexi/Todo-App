@@ -1,2 +1,25 @@
-# Todo-App
-A to-do app built in HTML, CSS, and JS!
+
+# To Do App
+
+A to do app that you can use in your browser (it also saves!)
+## Screenshots
+
+![App Screenshot](https://i.ibb.co/CvBDqgB/image-2022-07-27-214458147.png)
+
+
+## Languages Used
+
+- HTML
+- CSS
+- Javascript
+
+
+## Acknowledgements
+
+ - [The Odin Project](https://www.theodinproject.com/lessons/node-path-javascript-todo-list)
+ 
+
+## Feedback
+
+If you have any feedback, please reach out to me on Discord!
+itsAlexi#5450
