@@ -210,6 +210,11 @@
 }
 
 /* Add Task Container */
+.task.addTaskContainer {
+    display: none;
+}
+
+
 #addTaskForm {
   display: flex;
   justify-content: space-between;
