@@ -12,6 +12,7 @@
 </head>
 
 <body>
+
     <div class="container">
         <div class="header">
             <h1 class="title">Todo App</h1>
@@ -88,6 +89,23 @@
         <div class="footer">
             <p class="footerText">Created by <a href="https://github.com/itsalexi">Alexi</a></p>
             <p class="footerText">Built for <a href="https://theodinproject.com">The Odin Project</a> ❤️</p>
+        </div>
+    </div>
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <div class="modalheader">
+                <p>ADD NEW PROJECT</p>
+            </div>
+            <div class="form">
+                <form class="addProjectForm" id="modalForm">
+                    <input type="text" name="title" id="titleInput" placeholder="Title" required>
+                    <input type="text" name="desc" id="descInput" placeholder="Description" required>
+                </form>
+            </div>
+            <div class="modalbuttons">
+                <button id="cancelModal" class="modalbutton cancel">CANCEL</button>
+                <button type="submit" form="modalForm" id="addModalButton" class="modalbutton add">ADD</button>
+            </div>
         </div>
     </div>
 </body>
