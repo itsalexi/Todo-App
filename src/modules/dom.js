@@ -112,13 +112,18 @@ const DOMStuff = (() => {
     const tasks = projects[index].tasks;
     const taskDOM = document.querySelector(".tasks");
     for (task in tasks) {
+      console.log(task);
       const taskElement = document.createElement("div");
       taskElement.classList.add("task");
+      taskElement.dataset.index = task;
       taskDOM.appendChild(taskElement);
       const taskInfo = document.createElement("div");
       taskInfo.classList.add("task-info");
       const checkbox = document.createElement("div");
       checkbox.classList.add("checkbox");
+      if (tasks[task].finished) {
+        checkbox.classList.add("checked");
+      }
       const taskName = document.createElement("p");
       taskName.classList.add("taskName");
       taskElement.appendChild(taskInfo);
@@ -130,6 +135,16 @@ const DOMStuff = (() => {
       taskElement.appendChild(taskDue);
       taskDue.textContent = tasks[task].dueDate;
     }
+    const taskElements = document.querySelectorAll(".task");
+    console.log(`TASK ELEMENTS: ${taskElements}`);
+    taskElements.forEach((task) => {
+      task.addEventListener("click", function () {
+        console.log(`HELLO ${task.dataset.index}`);
+        tasks[task.dataset.index].finished =
+          !tasks[task.dataset.index].finished;
+        console.log(task.children[0].children[0].classList.toggle("checked"));
+      });
+    });
   };
 
   const renderAddTaskForm = function (task, index) {
@@ -191,14 +206,18 @@ const DOMStuff = (() => {
 
   const clearTasks = function () {
     const taskDOM = document.querySelector(".tasks");
+    const addTaskForm = document.querySelector(".addTaskContainer.task");
     taskDOM.innerHTML = "";
+    return addTaskForm;
   };
   const addTask = function (index, name, date) {
     const projects = main.getProjects();
+    const taskDOM = document.querySelector(".tasks");
 
-    clearTasks();
+    addTaskForm = clearTasks();
     main.createTask(index, name, date);
     renderTasks(projects, index);
+    taskDOM.appendChild(addTaskForm);
   };
   // MODALS
 
