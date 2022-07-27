@@ -89,6 +89,19 @@ const DOMStuff = (() => {
     task_container.appendChild(tasks);
     project_content.appendChild(task_container);
     renderTasks(projects, project);
+
+    const addTaskBtn = document.createElement("button");
+    task_container.appendChild(addTaskBtn);
+    addTaskBtn.classList.add("addTask");
+
+    addTaskBtn.innerHTML = "<span id='plus'>+</span> Add Task";
+
+    renderAddTaskForm(tasks, project);
+    addTaskBtn.addEventListener("click", () => {
+      taskForm = document.querySelector(".task.addTaskContainer");
+      taskForm.style.display = "flex";
+      addTaskBtn.style.display = "none";
+    });
   };
 
   const addProjectFromModal = function (title, desc) {
@@ -119,6 +132,74 @@ const DOMStuff = (() => {
     }
   };
 
+  const renderAddTaskForm = function (task, index) {
+    const taskContainer = document.createElement("div");
+    taskContainer.classList.add("addTaskContainer", "task");
+    task.appendChild(taskContainer);
+    const addTaskForm = document.createElement("form");
+    taskContainer.appendChild(addTaskForm);
+
+    addTaskForm.id = "addTaskForm";
+
+    const taskInputs = document.createElement("div");
+    addTaskForm.appendChild(taskInputs);
+    taskInputs.classList.add("taskInputs");
+
+    const nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.classList.add("taskInputName");
+    nameInput.id = "inputName";
+    nameInput.placeholder = "Name of Task";
+    nameInput.required = true;
+
+    const dateInput = document.createElement("input");
+    dateInput.type = "date";
+    dateInput.classList.add("taskInputDate");
+    dateInput.id = "inputDate";
+    dateInput.required = true;
+
+    const taskButtons = document.createElement("div");
+    const submit_task = document.createElement("button");
+    submit_task.id = "submit-task";
+    submit_task.type = "submit";
+    submit_task.textContent = "Submit";
+    const cancel_task = document.createElement("button");
+    cancel_task.id = "cancel-task";
+    cancel_task.textContent = "Cancel";
+    cancel_task.type = "button";
+    addTaskForm.appendChild(taskButtons);
+    taskButtons.classList.add("taskButtons");
+
+    taskButtons.appendChild(submit_task);
+    taskButtons.appendChild(cancel_task);
+    taskInputs.appendChild(nameInput);
+    taskInputs.appendChild(dateInput);
+
+    const addTaskBtn = document.querySelector(".addTask");
+
+    addTaskForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      taskContainer.style.display = "none";
+      addTaskBtn.style.display = "block";
+      addTask(index, nameInput.value, dateInput.value);
+    });
+    cancel_task.onclick = function () {
+      taskContainer.style.display = "none";
+      addTaskBtn.style.display = "block";
+    };
+  };
+
+  const clearTasks = function () {
+    const taskDOM = document.querySelector(".tasks");
+    taskDOM.innerHTML = "";
+  };
+  const addTask = function (index, name, date) {
+    const projects = main.getProjects();
+
+    clearTasks();
+    main.createTask(index, name, date);
+    renderTasks(projects, index);
+  };
   // MODALS
 
   const modal = document.querySelector(".modal");
@@ -139,6 +220,7 @@ const DOMStuff = (() => {
     const titleInput = document.getElementById("titleInput").value;
     const descInput = document.getElementById("descInput").value;
     e.preventDefault();
+    modal.style.display = "none";
     addProjectFromModal(titleInput, descInput);
   });
 

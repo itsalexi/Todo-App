@@ -10,6 +10,9 @@ function createProject(title, desc) {
   DOMStuff.renderProjectList(projects);
 }
 
+function createTask(project, title, date) {
+  projects[project].addTask(title, date);
+}
 // Everytime we add a project, we want to use renderProjectList();
 createProject(
   "Cool project",
@@ -17,17 +20,18 @@ createProject(
 );
 createProject("Wow another one", "Sickkkk");
 
-projects[0].addTask("Test Task", "YYYY-MM-DD");
-projects[0].addTask("Another Test Task", "YYYY-MM-DD");
-projects[0].addTask("How About One More Test Task", "YYYY-MM-DD");
+createTask(0, "Test Task", "YYYY-MM-DD");
+createTask(0, "Another Test Task", "YYYY-MM-DD");
+createTask(0, "How About One More Test Task", "YYYY-MM-DD");
 
-projects[1].addTask("This one deserves", "YYYY-MM-DD");
-projects[1].addTask("Some test tasks", "YYYY-MM-DD");
-projects[1].addTask("Too, doesn't he?", "YYYY-MM-DD");
+createTask(1, "This one deserves", "YYYY-MM-DD");
+createTask(1, "Some test tasks", "YYYY-MM-DD");
+createTask(1, "Too, doesn't he?", "YYYY-MM-DD");
+
 // DOMStuff.testSomething();
 // console.log(projects);
 
 function getProjects() {
   return projects;
 }
-export { getProjects, createProject };
+export { getProjects, createProject, createTask };
