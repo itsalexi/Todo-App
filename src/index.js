@@ -1,5 +1,5 @@
-import Project from "./modules/project.js";
-import DOMStuff from "./modules/dom.js";
+const Project = require("./modules/project.js");
+const DOMStuff = require("./modules/dom.js");
 
 let projects = [];
 
@@ -13,9 +13,17 @@ function createProject(title, desc) {
 createProject("Test", "desc");
 createProject("Test", "desc");
 createProject("Test", "desc");
+createProject("Test", "desc");
+createProject("Test", "desc");
+createProject("Test", "desc");
 
 
 DOMStuff.renderProjectList(projects);
 
-projects = DOMStuff.getProjectElements();
+// DOMStuff.testSomething();
 // console.log(projects);
+
+function getProjects() {
+  return projects;
+}
+export { getProjects, createProject };

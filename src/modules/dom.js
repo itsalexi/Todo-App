@@ -1,3 +1,5 @@
+const main = require("../index.js");
+
 const DOMStuff = (() => {
   const addProject = function (title, index) {
     const projectList = document.querySelector(".projectList");
@@ -6,17 +8,18 @@ const DOMStuff = (() => {
     project.classList.add("project");
     project.textContent = title;
     projectList.appendChild(project);
-    addProjectListener();
   };
 
   const selectProject = function (e) {
-    try {
+    if (!document.querySelector(".selected")) {
+      e.target.classList.toggle("selected");
+    } else {
       selected = document.querySelector(".selected");
       selected.classList.toggle("selected");
-    } finally {
       e.target.classList.toggle("selected");
-      resetProjectContent();
     }
+    resetProjectContent();
+    renderProject(e.target.dataset.index);
   };
 
   const getProjectElements = function () {
@@ -46,7 +49,18 @@ const DOMStuff = (() => {
     for (project in projects) {
       addProject(projects[project].title, projects[project].index);
     }
+    addProjectListener();
   };
+
+  const renderProject = function (project) {
+    console.log(project);
+  };
+
+  //   const testSomething = function () {
+  //     console.log(main.getProjects());
+  //     main.createProject("another one", "cool");
+  //     console.log(main.getProjects());
+  //   };
 
   return {
     addProject,
@@ -54,6 +68,8 @@ const DOMStuff = (() => {
     getProjectElements,
     addProjectListener,
     renderProjectList,
+    renderProject,
+    // testSomething,
   };
 })();
 

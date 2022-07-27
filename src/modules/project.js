@@ -1,4 +1,4 @@
-export default class Project {
+class Project {
   constructor(title, desc, index) {
     this.title = title;
     this.desc = desc;
@@ -6,3 +6,5 @@ export default class Project {
     this.tasks = [];
   }
 }
+
+module.exports = Project;
