@@ -75,6 +75,9 @@
   border-radius: 0.2em;
 }
 
+.addProject {
+    margin-top: 1em;
+}
 .selected {
   color: #f1f5f9;
 }
