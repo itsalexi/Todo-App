@@ -54,6 +54,7 @@ const DOMStuff = (() => {
 
   const renderProject = function (project) {
     const projects = main.getProjects();
+    console.log(projects);
     const project_content = document.querySelector(".project-content");
     const project_info = document.createElement("div");
     project_info.classList.add("project-info");
@@ -67,19 +68,11 @@ const DOMStuff = (() => {
     const info_desc = document.createElement("p");
     info_title.classList.add("info-title");
     info_desc.classList.add("info-desc");
-
     info_title.textContent = projects[project].title;
     info_desc.textContent = projects[project].desc;
 
     info.appendChild(info_title);
     info.appendChild(info_desc);
-
-    //Edit div
-    const edit = document.createElement("edit");
-    edit.classList.add("edit");
-    edit.textContent = "Edit";
-
-    project_info.appendChild(edit);
 
     // Tasks
     const task_container = document.createElement("div");
@@ -133,6 +126,7 @@ const DOMStuff = (() => {
       const taskDue = document.createElement("p");
       taskDue.classList.add("timedue");
       taskElement.appendChild(taskDue);
+
       taskDue.textContent = tasks[task].dueDate;
     }
     const taskElements = document.querySelectorAll(".task");

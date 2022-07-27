@@ -1,37 +1,41 @@
 const Project = require("./modules/project.js");
 const DOMStuff = require("./modules/dom.js");
 
-let projects = [];
+let defaultList = [];
+let projects = localStorage.getItem("projectList");
+projects = JSON.parse(projects || JSON.stringify(defaultList));
 
-function createProject(title, desc) {
-  const index = projects.length;
-  const project = new Project(title, desc, index);
-  projects.push(project);
-  DOMStuff.renderProjectList(projects);
+let parsedProjects = [];
+
+for (let project in projects) {
+  createProject(
+    projects[project].title,
+    projects[project].desc,
+    projects[project].tasks
+  );
+}
+
+console.log(parsedProjects);
+function createProject(title, desc, tasks) {
+  const index = parsedProjects.length;
+  const project = new Project(title, desc, index, tasks);
+  parsedProjects.push(project);
+  DOMStuff.renderProjectList(parsedProjects);
+  saveToLocalStorage();
 }
 
 function createTask(project, title, date) {
-  projects[project].addTask(title, date);
+  parsedProjects[project].addTask(title, date);
+  saveToLocalStorage();
 }
-// Everytime we add a project, we want to use renderProjectList();
-createProject(
-  "Cool project",
-  "One of my cool projects, currently work in progress"
-);
-createProject("Wow another one", "Sickkkk");
 
-createTask(0, "Test Task", "YYYY-MM-DD");
-createTask(0, "Another Test Task", "YYYY-MM-DD");
-createTask(0, "How About One More Test Task", "YYYY-MM-DD");
+function saveToLocalStorage() {
+  localStorage.setItem("projectList", JSON.stringify(parsedProjects));
+}
 
-createTask(1, "This one deserves", "YYYY-MM-DD");
-createTask(1, "Some test tasks", "YYYY-MM-DD");
-createTask(1, "Too, doesn't he?", "YYYY-MM-DD");
-
-// DOMStuff.testSomething();
-// console.log(projects);
+DOMStuff.renderProjectList(parsedProjects);
 
 function getProjects() {
-  return projects;
+  return parsedProjects;
 }
 export { getProjects, createProject, createTask };
