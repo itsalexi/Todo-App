@@ -3,12 +3,19 @@ import DOMStuff from "./modules/dom.js";
 
 let projects = [];
 
-for (project in projects) {
-  DOMStuff.addProject(projects[project].title);
+function createProject(title, desc) {
+  const index = projects.length;
+  const project = new Project(title, desc, index);
+  projects.push(project);
 }
 
-console.log(DOMStuff);
-DOMStuff.addProjectListener();
-DOMStuff.addProject("Stupid");
+// Everytime we add a project, we want to use renderProjectList();
+createProject("Test", "desc");
+createProject("Test", "desc");
+createProject("Test", "desc");
+
+
+DOMStuff.renderProjectList(projects);
+
 projects = DOMStuff.getProjectElements();
 // console.log(projects);
