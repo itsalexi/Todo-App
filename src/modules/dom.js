@@ -1,9 +1,11 @@
 const DOMStuff = (() => {
   const addProject = function (title) {
+    const projectList = document.querySelector(".projectList");
     const project = document.createElement("li");
     project.classList.add("project");
     project.textContent = title;
     projectList.appendChild(project);
+    addProjectListener();
   };
 
   const selectProject = function (e) {
