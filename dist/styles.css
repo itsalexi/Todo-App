@@ -76,7 +76,7 @@
 }
 
 .addProject {
-    margin-top: 1em;
+  margin-top: 1em;
 }
 .selected {
   color: #f1f5f9;
@@ -169,6 +169,12 @@
   justify-content: space-between;
   padding: 1em;
   box-sizing: border-box;
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
 .task:hover {
