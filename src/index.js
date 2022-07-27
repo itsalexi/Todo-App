@@ -29,6 +29,11 @@ function createTask(project, title, date) {
   saveToLocalStorage();
 }
 
+function removeTask(project, index) {
+  parsedProjects[project].removeTask(index);
+  saveToLocalStorage();
+}
+
 function saveToLocalStorage() {
   localStorage.setItem("projectList", JSON.stringify(parsedProjects));
 }
@@ -38,4 +43,4 @@ DOMStuff.renderProjectList(parsedProjects);
 function getProjects() {
   return parsedProjects;
 }
-export { getProjects, createProject, createTask };
+export { getProjects, createProject, createTask, removeTask };

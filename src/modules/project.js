@@ -12,7 +12,9 @@ class Project {
     this.tasks.push(task);
     return task;
   }
-
+  removeTask(index) {
+    return this.tasks.splice(index, 1);
+  }
 }
 
 module.exports = Project;

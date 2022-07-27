@@ -124,19 +124,39 @@ const DOMStuff = (() => {
       taskName.textContent = tasks[task].title;
       taskInfo.appendChild(taskName);
       const taskDue = document.createElement("p");
+      const rightTask = document.createElement("div");
+      const removeButton = document.createElement("button");
+
+      rightTask.classList.add("rightTask");
       taskDue.classList.add("timedue");
-      taskElement.appendChild(taskDue);
+      taskElement.appendChild(rightTask);
+
+      rightTask.append(taskDue);
+      rightTask.append(removeButton);
 
       taskDue.textContent = tasks[task].dueDate;
+      removeButton.classList.add("remove");
+      removeButton.textContent = "x";
     }
     const taskElements = document.querySelectorAll(".task");
-    console.log(`TASK ELEMENTS: ${taskElements}`);
-    taskElements.forEach((task) => {
-      task.addEventListener("click", function () {
-        console.log(`HELLO ${task.dataset.index}`);
-        tasks[task.dataset.index].finished =
-          !tasks[task.dataset.index].finished;
-        console.log(task.children[0].children[0].classList.toggle("checked"));
+    if (!taskElements.length < 0) {
+      taskElements.forEach((task) => {
+        task.addEventListener("click", function () {
+          tasks[task.dataset.index].finished =
+            !tasks[task.dataset.index].finished;
+          task.children[0].children[0].classList.toggle("checked");
+        });
+      });
+    }
+    const removeButtons = document.querySelectorAll(".remove");
+    removeButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        main.removeTask(
+          index,
+          event.target.parentNode.parentNode.dataset.index
+        );
+        clearTasks();
+        renderTasks(projects, index);
       });
     });
   };
