@@ -189,7 +189,19 @@
   border: 2px solid #94a3b8;
   border-radius: 50%;
 }
+.remove {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  color: crimson;
+  font-weight: bold;
+  width: 1em;
+}
 
+.rightTask {
+  display: flex;
+  align-items: center;
+}
 .checkbox.checked {
   background-color: rgb(86, 243, 86);
   background-image: url("./img/checkbox.svg");
@@ -211,9 +223,8 @@
 
 /* Add Task Container */
 .task.addTaskContainer {
-    display: none;
+  display: none;
 }
-
 
 #addTaskForm {
   display: flex;
